@@ -5,10 +5,27 @@
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="validation_layers.cpp" />
     <ClCompile Include="vulkan_instance.cpp" />
+    <ClCompile Include="window_glfw.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="logger.h" />
     <ClInclude Include="validation_layers.h" />
     <ClInclude Include="vulkan_instance.h" />
+    <ClInclude Include="window_interface.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="window_glfw.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Kernal">
+      <UniqueIdentifier>{3724f1af-b1aa-4a49-af4c-7095be4a2170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{3c20898e-66ca-4304-9ae1-5663f77fb09c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
