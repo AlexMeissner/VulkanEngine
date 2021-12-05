@@ -11,6 +11,10 @@
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
 
+// Console Color
+#define NOMINMAX
+#include <Windows.h>
+
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
@@ -384,7 +388,7 @@ private:
 	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo) {
 		createInfo = {};
 		createInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
-		createInfo.messageSeverity = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+		createInfo.messageSeverity = /*VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |*/ VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
 		createInfo.messageType = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
 		createInfo.pfnUserCallback = debugCallback;
 	}
@@ -1736,8 +1740,40 @@ private:
 		return buffer;
 	}
 
-	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData) {
-		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+	static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData, void* pUserData)
+	{
+		switch (messageSeverity)
+		{
+		case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 07);
+			break;
+
+		case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+			break;
+
+		case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
+			break;
+
+		case VkDebugUtilsMessageSeverityFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+			break;
+		}
+
+		switch (messageType)
+		{
+		case VkDebugUtilsMessageTypeFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 206);
+			break;
+
+		case VkDebugUtilsMessageTypeFlagBitsEXT::VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT:
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 236);
+			break;
+		}
+
+		std::cout << pCallbackData->pMessage << "\n";
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 07);
 
 		return VK_FALSE;
 	}
