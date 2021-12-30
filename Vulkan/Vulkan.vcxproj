@@ -90,10 +90,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="instance.cpp" />
+    <ClCompile Include="validation.cpp" />
+    <ClCompile Include="validation_layers.cpp" />
+    <ClCompile Include="vulkan_kernal.cpp" />
+    <ClCompile Include="vulkan_settings.cpp" />
     <ClCompile Include="window_glfw.cpp" />
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="instance.h" />
+    <ClInclude Include="validation.h" />
+    <ClInclude Include="validation_layers.h" />
+    <ClInclude Include="vulkan_kernal.h" />
+    <ClInclude Include="vulkan_settings.h" />
     <ClInclude Include="window_glfw.h" />
     <ClInclude Include="window_interface.h" />
   </ItemGroup>
