@@ -28,6 +28,9 @@
     <ClCompile Include="vulkan_logical_device.cpp">
       <Filter>Initialization</Filter>
     </ClCompile>
+    <ClCompile Include="vulkan_surface.cpp">
+      <Filter>Initialization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window_interface.h">
@@ -57,6 +60,9 @@
       <Filter>Initialization</Filter>
     </ClInclude>
     <ClInclude Include="vulkan_logical_device.h">
+      <Filter>Initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="vulkan_surface.h">
       <Filter>Initialization</Filter>
     </ClInclude>
   </ItemGroup>

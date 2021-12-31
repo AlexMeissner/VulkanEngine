@@ -98,6 +98,7 @@
     <ClCompile Include="vulkan_kernal.cpp" />
     <ClCompile Include="vulkan_queue_family.cpp" />
     <ClCompile Include="vulkan_settings.cpp" />
+    <ClCompile Include="vulkan_surface.cpp" />
     <ClCompile Include="vulkan_swap_chain.cpp" />
     <ClCompile Include="window_glfw.cpp" />
     <ClCompile Include="_main.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="vulkan_kernal.h" />
     <ClInclude Include="vulkan_queue_family.h" />
     <ClInclude Include="vulkan_settings.h" />
+    <ClInclude Include="vulkan_surface.h" />
     <ClInclude Include="vulkan_swap_chain.h" />
     <ClInclude Include="window_glfw.h" />
     <ClInclude Include="window_interface.h" />

@@ -13,7 +13,7 @@ namespace vulkan_kernal
 	public:
 		~window_glfw() override;
 
-		VkSurfaceKHR create_surface(const VkInstance instance) const;
+		VkSurfaceKHR create_surface(const VkInstance instance) const override;
 
 		std::vector<const char*> get_extensions() const override;
 		std::pair<int, int> get_framebuffer_size() const override;

@@ -365,7 +365,7 @@ private:
 
 	void createSurface()
 	{
-		surface = static_cast<vulkan_kernal::window_glfw*>(window)->create_surface(instance);
+		surface = window->create_surface(instance);
 
 		if (!surface)
 		{

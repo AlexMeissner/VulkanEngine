@@ -1,6 +1,7 @@
 #include "vulkan_kernal.h"
 #include "instance.h"
 #include "validation.h"
+#include "vulkan_surface.h"
 #include "vulkan_settings.h"
 #include "vulkan_queue_family.h"
 #include "vulkan_logical_device.h"
@@ -22,7 +23,7 @@ namespace vulkan_kernal
 
 		instance = instance::create(name, extensions, validation_layer_create_info);
 		debug_messenger = validation_layers::create(instance);
-		// TODO: Surface
+		surface = surface::create(instance, window);
 		physical_device = physical_device::create(instance, surface);
 		logical_device = logical_device::create(physical_device, surface);
 
@@ -40,6 +41,7 @@ namespace vulkan_kernal
 		cleanup_swap_chain();
 		vkDestroyDevice(logical_device, nullptr);
 		validation_layers::cleanup(instance, debug_messenger);
+		vkDestroySurfaceKHR(instance, surface, nullptr);
 		vkDestroyInstance(instance, nullptr);
 	}
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <vulkan/vulkan.h>
 
 namespace vulkan_kernal
 {
@@ -9,6 +10,7 @@ namespace vulkan_kernal
 	public:
 		virtual ~window_interface() = default;
 
+		virtual VkSurfaceKHR create_surface(const VkInstance instance) const = 0;
 		virtual std::vector<const char*> get_extensions() const = 0;
 		virtual std::pair<int, int> get_framebuffer_size() const = 0;
 		virtual bool has_size_changed() const = 0;
