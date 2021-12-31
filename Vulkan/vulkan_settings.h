@@ -7,7 +7,6 @@ namespace vulkan_kernal
 {
 	namespace instance
 	{
-		extern VkStructureType application_type;
 		extern uint32_t application_version;
 		extern const char* engine_name;
 		extern uint32_t engine_version;
@@ -20,13 +19,12 @@ namespace vulkan_kernal
 	{
 		extern bool enabled;
 		extern std::vector<const char*> names;
-		extern VkStructureType type;
 		extern VkDebugUtilsMessengerCreateFlagsEXT message_flags;
 		extern VkDebugUtilsMessageSeverityFlagsEXT message_severity;
 		extern VkDebugUtilsMessageTypeFlagsEXT message_type;
 	}
 
-	namespace physical_device
+	namespace device
 	{
 		extern std::vector<const char*> extensions;
 	}

@@ -11,7 +11,7 @@ namespace vulkan_kernal::instance
 		VkInstance instance = nullptr;
 
 		VkApplicationInfo app_info{};
-		app_info.sType = application_type;
+		app_info.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		app_info.pNext = nullptr;
 		app_info.pApplicationName = name;
 		app_info.applicationVersion = application_version;
@@ -35,10 +35,5 @@ namespace vulkan_kernal::instance
 		}
 
 		return instance;
-	}
-
-	void cleanup(VkInstance instance)
-	{
-		vkDestroyInstance(instance, nullptr);
 	}
 }

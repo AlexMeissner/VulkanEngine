@@ -18,5 +18,10 @@ namespace vulkan_kernal
 	private:
 		VkInstance instance = nullptr;
 		VkDebugUtilsMessengerEXT debug_messenger = nullptr;
+		VkSurfaceKHR surface = nullptr;
+		VkPhysicalDevice physical_device = nullptr;
+		VkDevice logical_device = nullptr;
+		VkQueue graphics_queue = nullptr;
+		VkQueue present_queue = nullptr;
 	};
 }

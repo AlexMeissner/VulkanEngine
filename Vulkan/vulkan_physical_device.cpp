@@ -17,7 +17,7 @@ namespace vulkan_kernal::physical_device
 		std::vector<VkExtensionProperties> available_extensions(count);
 		vkEnumerateDeviceExtensionProperties(device, nullptr, &count, available_extensions.data());
 
-		std::set<std::string> required_extensions(extensions.begin(), extensions.end());
+		std::set<std::string> required_extensions(device::extensions.begin(), device::extensions.end());
 
 		for (const auto& extension : available_extensions)
 		{

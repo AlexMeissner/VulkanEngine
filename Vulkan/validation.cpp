@@ -48,7 +48,7 @@ namespace vulkan_kernal::validation_layers
 	VkDebugUtilsMessengerCreateInfoEXT generate_create_info()
 	{
 		VkDebugUtilsMessengerCreateInfoEXT create_info{};
-		create_info.sType = type;
+		create_info.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 		create_info.pNext = nullptr;
 		create_info.flags = message_flags;
 		create_info.messageSeverity = message_severity;

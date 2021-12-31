@@ -1,7 +1,8 @@
 #pragma once
 
+#include <vulkan/vulkan.h>
+
 namespace vulkan_kernal::logical_device
 {
-	void create();
-	void cleanup();
+	VkDevice create(VkPhysicalDevice device, VkSurfaceKHR surface);
 }
