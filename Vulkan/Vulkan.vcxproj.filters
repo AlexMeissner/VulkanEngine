@@ -12,7 +12,6 @@
     <ClCompile Include="validation.cpp">
       <Filter>Initialization</Filter>
     </ClCompile>
-    <ClCompile Include="instance.cpp" />
     <ClCompile Include="vulkan_settings.cpp">
       <Filter>Initialization</Filter>
     </ClCompile>
@@ -29,6 +28,9 @@
       <Filter>Initialization</Filter>
     </ClCompile>
     <ClCompile Include="vulkan_surface.cpp">
+      <Filter>Initialization</Filter>
+    </ClCompile>
+    <ClCompile Include="vulkan_instance.cpp">
       <Filter>Initialization</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,7 +51,6 @@
     <ClInclude Include="validation.h">
       <Filter>Initialization</Filter>
     </ClInclude>
-    <ClInclude Include="instance.h" />
     <ClInclude Include="vulkan_physical_device.h">
       <Filter>Initialization</Filter>
     </ClInclude>
@@ -63,6 +64,9 @@
       <Filter>Initialization</Filter>
     </ClInclude>
     <ClInclude Include="vulkan_surface.h">
+      <Filter>Initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="vulkan_instance.h">
       <Filter>Initialization</Filter>
     </ClInclude>
   </ItemGroup>

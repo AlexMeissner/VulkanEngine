@@ -90,7 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="instance.cpp" />
+    <ClCompile Include="vulkan_instance.cpp" />
     <ClCompile Include="validation.cpp" />
     <ClCompile Include="validation_layers.cpp" />
     <ClCompile Include="vulkan_logical_device.cpp" />
@@ -104,7 +104,7 @@
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="instance.h" />
+    <ClInclude Include="vulkan_instance.h" />
     <ClInclude Include="validation.h" />
     <ClInclude Include="validation_layers.h" />
     <ClInclude Include="vulkan_logical_device.h" />

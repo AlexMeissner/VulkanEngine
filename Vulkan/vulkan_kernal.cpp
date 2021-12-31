@@ -1,5 +1,5 @@
 #include "vulkan_kernal.h"
-#include "instance.h"
+#include "vulkan_instance.h"
 #include "validation.h"
 #include "vulkan_surface.h"
 #include "vulkan_settings.h"
@@ -12,17 +12,7 @@ namespace vulkan_kernal
 {
 	vulkan_kernal2::vulkan_kernal2(const char* name, const window_interface* window)
 	{
-		void* validation_layer_create_info = nullptr;
-		std::vector<const char*> extensions = window->get_extensions();
-
-		if (validation_layers::enabled && validation_layers::available())
-		{
-			extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-			const auto create_info = validation_layers::generate_create_info();
-			validation_layer_create_info = (VkDebugUtilsMessengerCreateInfoEXT*)&create_info;
-		}
-
-		instance = instance::create(name, extensions, validation_layer_create_info);
+		instance = instance::create(name, window);
 		debug_messenger = validation_layers::create(instance);
 		surface = surface::create(instance, window);
 		physical_device = physical_device::create(instance, surface);
