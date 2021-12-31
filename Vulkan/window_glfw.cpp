@@ -2,7 +2,7 @@
 
 namespace vulkan_kernal
 {
-	std::map<GLFWwindow*, bool> window_glfw::resized_map {};
+	std::map<GLFWwindow*, bool> window_glfw::resized_map{};
 
 	window_glfw::~window_glfw()
 	{
@@ -25,7 +25,7 @@ namespace vulkan_kernal
 		return { glfwExtensions, glfwExtensions + glfwExtensionCount };
 	}
 
-	std::pair<int, int> window_glfw::get_framebuffer_size() const
+	VkExtent2D window_glfw::get_framebuffer_size() const
 	{
 		int width = 0, height = 0;
 		glfwGetFramebufferSize(window, &width, &height);
@@ -36,7 +36,7 @@ namespace vulkan_kernal
 			glfwWaitEvents();
 		}
 
-		return { width, height };
+		return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
 	}
 
 	bool window_glfw::has_size_changed() const

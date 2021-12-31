@@ -23,5 +23,6 @@ namespace vulkan_kernal
 		VkDevice logical_device = nullptr;
 		VkQueue graphics_queue = nullptr;
 		VkQueue present_queue = nullptr;
+		VkSwapchainKHR swap_chain = nullptr;
 	};
 }

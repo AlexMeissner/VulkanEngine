@@ -31,4 +31,9 @@ namespace vulkan_kernal
 	{
 		std::vector<const char*> extensions = { VK_KHR_SWAPCHAIN_EXTENSION_NAME };
 	}
+
+	namespace swap_chain
+	{
+		VkPresentModeKHR prefered_present_mode = VK_PRESENT_MODE_MAILBOX_KHR;
+	}
 }

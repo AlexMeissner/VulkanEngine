@@ -28,4 +28,9 @@ namespace vulkan_kernal
 	{
 		extern std::vector<const char*> extensions;
 	}
+
+	namespace swap_chain
+	{
+		extern VkPresentModeKHR prefered_present_mode;
+	}
 }

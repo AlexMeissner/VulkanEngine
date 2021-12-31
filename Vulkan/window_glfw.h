@@ -16,7 +16,7 @@ namespace vulkan_kernal
 		VkSurfaceKHR create_surface(const VkInstance instance) const override;
 
 		std::vector<const char*> get_extensions() const override;
-		std::pair<int, int> get_framebuffer_size() const override;
+		VkExtent2D get_framebuffer_size() const override;
 		bool has_size_changed() const override;
 		bool initialize(const int width, const int height, const char* title) override;
 		void poll_events() const override;
