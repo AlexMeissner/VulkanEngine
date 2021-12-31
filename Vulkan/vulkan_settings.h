@@ -25,4 +25,9 @@ namespace vulkan_kernal
 		extern VkDebugUtilsMessageSeverityFlagsEXT message_severity;
 		extern VkDebugUtilsMessageTypeFlagsEXT message_type;
 	}
+
+	namespace physical_device
+	{
+		extern std::vector<const char*> extensions;
+	}
 }
