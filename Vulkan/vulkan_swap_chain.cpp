@@ -1,6 +1,7 @@
 #include "vulkan_swap_chain.h"
 #include "vulkan_queue_family.h"
 #include "vulkan_settings.h"
+#include "vulkan_image_view.h"
 
 #include <stdexcept>
 #include <algorithm>
@@ -50,12 +51,52 @@ namespace vulkan_kernal::swap_chain
 		}
 	}
 
-	VkSwapchainKHR create(VkPhysicalDevice physical_device, VkDevice logical_device, VkSurfaceKHR surface, const window_interface* window)
+	VkSurfaceCapabilitiesKHR surface_capabilities(VkPhysicalDevice device, VkSurfaceKHR surface)
+	{
+		VkSurfaceCapabilitiesKHR capabilities{};
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &capabilities);
+		return capabilities;
+	}
+
+	std::vector<VkSurfaceFormatKHR> formats(VkPhysicalDevice device, VkSurfaceKHR surface)
+	{
+		uint32_t formatCount;
+		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
+
+		std::vector<VkSurfaceFormatKHR> formats;
+
+		if (formatCount != 0)
+		{
+			formats.resize(formatCount);
+			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, formats.data());
+		}
+
+		return formats;
+	}
+
+	std::vector<VkPresentModeKHR> present_modes(VkPhysicalDevice device, VkSurfaceKHR surface)
+	{
+		uint32_t presentModeCount = 0;
+		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
+
+		std::vector<VkPresentModeKHR> modes;
+
+		if (presentModeCount != 0)
+		{
+			modes.resize(presentModeCount);
+			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, modes.data());
+		}
+
+		return modes;
+	}
+
+	void swap_chain2::create(VkPhysicalDevice physical_device, VkDevice logical_device, VkSurfaceKHR surface, const window_interface* window)
 	{
 		VkSurfaceCapabilitiesKHR capabilities = surface_capabilities(physical_device, surface);
-		VkSurfaceFormatKHR surface_format = choose_surface_format(formats(physical_device, surface));
 		VkPresentModeKHR present_mode = choose_present_mode(present_modes(physical_device, surface));
-		VkExtent2D extent = choose_extent(capabilities, window);
+
+		surface_format = choose_surface_format(formats(physical_device, surface));
+		extent = choose_extent(capabilities, window);
 
 		uint32_t image_count = capabilities.minImageCount + 1;
 		if (capabilities.maxImageCount > 0 && image_count > capabilities.maxImageCount)
@@ -94,52 +135,40 @@ namespace vulkan_kernal::swap_chain
 			create_info.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
 		}
 
-		VkSwapchainKHR swap_chain = nullptr;
-
 		if (vkCreateSwapchainKHR(logical_device, &create_info, nullptr, &swap_chain) != VK_SUCCESS)
 		{
 			throw std::runtime_error("failed to create swap chain!");
 		}
 
-		return swap_chain;
-	}
+		vkGetSwapchainImagesKHR(logical_device, swap_chain, &image_count, nullptr);
+		images.resize(image_count);
+		vkGetSwapchainImagesKHR(logical_device, swap_chain, &image_count, images.data());
 
-	VkSurfaceCapabilitiesKHR surface_capabilities(VkPhysicalDevice device, VkSurfaceKHR surface)
-	{
-		VkSurfaceCapabilitiesKHR capabilities{};
-		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &capabilities);
-		return capabilities;
-	}
+		image_views.resize(images.size());
 
-	std::vector<VkSurfaceFormatKHR> formats(VkPhysicalDevice device, VkSurfaceKHR surface)
-	{
-		uint32_t formatCount;
-		vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
-
-		std::vector<VkSurfaceFormatKHR> formats;
-
-		if (formatCount != 0)
+		for (uint32_t index = 0; index < images.size(); ++index)
 		{
-			formats.resize(formatCount);
-			vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, formats.data());
+			image_views[index] = image_view::create(logical_device, images.at(index), VK_IMAGE_VIEW_TYPE_2D, surface_format.format, VK_IMAGE_ASPECT_COLOR_BIT, 1);
+		}
+	}
+
+	void swap_chain2::cleanup(VkDevice logical_device)
+	{
+		for (VkImageView image_view : image_views) 
+		{
+			vkDestroyImageView(logical_device, image_view, nullptr);
 		}
 
-		return formats;
+		vkDestroySwapchainKHR(logical_device, swap_chain, nullptr);
 	}
 
-	std::vector<VkPresentModeKHR> present_modes(VkPhysicalDevice device, VkSurfaceKHR surface)
+	VkExtent2D swap_chain2::get_extent() const
 	{
-		uint32_t presentModeCount = 0;
-		vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
+		return extent;
+	}
 
-		std::vector<VkPresentModeKHR> modes;
-
-		if (presentModeCount != 0)
-		{
-			modes.resize(presentModeCount);
-			vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, modes.data());
-		}
-
-		return modes;
+	VkFormat swap_chain2::get_format() const
+	{
+		return surface_format.format;
 	}
 };

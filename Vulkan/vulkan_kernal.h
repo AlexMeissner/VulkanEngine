@@ -5,6 +5,11 @@
 
 namespace vulkan_kernal
 {
+	namespace swap_chain
+	{
+		class swap_chain2;
+	}
+
 	class vulkan_kernal2
 	{
 	public:
@@ -13,7 +18,6 @@ namespace vulkan_kernal
 
 	private:
 		void cleanup();
-		void cleanup_swap_chain();
 
 	private:
 		VkInstance instance = nullptr;
@@ -23,7 +27,6 @@ namespace vulkan_kernal
 		VkDevice logical_device = nullptr;
 		VkQueue graphics_queue = nullptr;
 		VkQueue present_queue = nullptr;
-		VkSwapchainKHR swap_chain = nullptr;
-		std::vector<VkImageView> swap_chain_image_views;
+		swap_chain::swap_chain2* swap_chain = nullptr;
 	};
 }
