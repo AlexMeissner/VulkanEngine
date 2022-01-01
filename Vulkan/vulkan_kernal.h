@@ -1,15 +1,12 @@
 #pragma once
 
 #include "window_interface.h"
+#include "vulkan_swap_chain.h"
+
 #include <vulkan/vulkan.h>
 
 namespace vulkan_kernal
 {
-	namespace swap_chain
-	{
-		class swap_chain2;
-	}
-
 	class vulkan_kernal2
 	{
 	public:
@@ -27,6 +24,6 @@ namespace vulkan_kernal
 		VkDevice logical_device = nullptr;
 		VkQueue graphics_queue = nullptr;
 		VkQueue present_queue = nullptr;
-		swap_chain::swap_chain2* swap_chain = nullptr;
+		swap_chain::swap_chain2 swap_chain;
 	};
 }
