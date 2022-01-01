@@ -90,6 +90,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="vulkan_image_view.cpp" />
     <ClCompile Include="vulkan_instance.cpp" />
     <ClCompile Include="validation.cpp" />
     <ClCompile Include="validation_layers.cpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="vulkan_image_view.h" />
     <ClInclude Include="vulkan_instance.h" />
     <ClInclude Include="validation.h" />
     <ClInclude Include="validation_layers.h" />

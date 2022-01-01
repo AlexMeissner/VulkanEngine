@@ -24,5 +24,6 @@ namespace vulkan_kernal
 		VkQueue graphics_queue = nullptr;
 		VkQueue present_queue = nullptr;
 		VkSwapchainKHR swap_chain = nullptr;
+		std::vector<VkImageView> swap_chain_image_views;
 	};
 }

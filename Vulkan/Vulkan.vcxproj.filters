@@ -33,6 +33,9 @@
     <ClCompile Include="vulkan_instance.cpp">
       <Filter>Initialization</Filter>
     </ClCompile>
+    <ClCompile Include="vulkan_image_view.cpp">
+      <Filter>Initialization</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="window_interface.h">
@@ -67,6 +70,9 @@
       <Filter>Initialization</Filter>
     </ClInclude>
     <ClInclude Include="vulkan_instance.h">
+      <Filter>Initialization</Filter>
+    </ClInclude>
+    <ClInclude Include="vulkan_image_view.h">
       <Filter>Initialization</Filter>
     </ClInclude>
   </ItemGroup>
